@@ -1,4 +1,4 @@
-import { Request, Response, Router } from 'express';
+import { NextFunction, Request, Response, Router } from 'express';
 import User from '../models/User';
 const express = require('express')
 const routes = express.Router()
@@ -12,8 +12,8 @@ const users = [
     }
 ]
 
-routes.post('/login', (req: Request, res: Response) => {
-    const {email, password} = req.body
+routes.post('/login', (req: Request, res: Response, next: NextFunction) => {
+        const {email, password} = req.body
 
     const user = users.find(user => user.email === email && user.password === password)
     if (user){
