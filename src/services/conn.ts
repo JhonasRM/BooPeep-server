@@ -1,16 +1,18 @@
-async function conn() {
-    try {
-        mongoose.set("strictQuery", true);
+import mongoose, { Connection } from 'mongoose';
 
-        await mongoose.connect(
-            "mongodb+srv://root:<LTittBNnYnl3LSYi>@cluster0.wofeoxy.mongodb.net/?retryWrites=true&w=majority"
-        )
+async function conn(): Promise<void> {
+  try {
+    mongoose.set('strictQuery', true);
 
-        console.log('Conectado ao Banco!')
-    } catch (error) {
-        console.log(`Erro: ${error}`)
-    }    
+    await mongoose.connect(
+      'mongodb+srv://root:<LTittBNnYnl3LSYi>@cluster0.wofeoxy.mongodb.net/?retryWrites=true&w=majority',
+    );
+
+    console.log('Conectado ao Banco!');
+  } catch (error) {
+    console.error(`Erro: ${error}`);
+  }
 }
 
-export default conn
+export default conn;
 

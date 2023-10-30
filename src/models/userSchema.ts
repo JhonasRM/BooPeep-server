@@ -1,15 +1,15 @@
-import mongoose, { Schema } from 'mongoose'
+import mongoose, { Schema, Document, model, Model } from 'mongoose'
 
-interface User extends Document {
+interface IUser extends Document {
   id: Number,
   name: String,
   email: String,
   password: String,
   phone: Number,
-  course: String,
+  //course: String,
 }
 
-const userSchema: Schema = new Schema({
+const userSchema: Schema<IUser> = new Schema({
   id: {
     type: Number,
     required: true
@@ -38,9 +38,6 @@ const userSchema: Schema = new Schema({
 { timestamps: true}
 )
 
-const User = mongoose.model("User", userSchema)
+const User:Model<IUser> = model<IUser>("User", userSchema)
 
-module.exports = {
-  User,
-  userSchema,
-}
+export{User, userSchema}; 
