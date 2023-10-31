@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import {  User as UserModel } from '../models/userSchema';
+import {  User, User as UserModel } from '../models/userSchema';
 
  const UserController = {
 
@@ -10,7 +10,7 @@ import {  User as UserModel } from '../models/userSchema';
                 email: req.body.email,
                 password: req.body.password,
                 phone: req.body.phone,
-                // course: req.body.course
+                //course: req.body.course
             };
 
             const responce = await UserModel.create(user);
@@ -55,9 +55,28 @@ import {  User as UserModel } from '../models/userSchema';
             const deletedUser = await UserModel.findByIdAndDelete(id)
 
             res.json(201).json({deletedUser, msg: "Serviço excluido com sucesso"})
-    }
+    },
+ 
+ update: async (req: Request, res: Response) => {
+    const id = req.params.id
+    const user ={
+        name : req.body.name, 
+        email: req.body.email,
+        password: req.body.password,
+        phone: req.body.phone,
+        // course: req.body.course
+    };
 
- };
+            const updatedUser = await UserModel.findByIdAndUpdate(id, user)
+
+            if(!user){
+                res.status(404).json({msg: "Usuário não Encontrado"})
+                return
+            }
+        res.status(200).json({user, msg: "Usuário atualizado com sucesso."})
+    
+        }
+    }
 
 export default UserController;
 

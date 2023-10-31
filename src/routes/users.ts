@@ -18,5 +18,9 @@ router
  router
     .route("/user:id")
     .delete((req: Request ,res: Response) => UserController.delete(req, res))
+
+router
+    .route("/user:id")
+    .put((req: Request ,res: Response) => UserController.update(req, res))
 module.exports = router;
 
