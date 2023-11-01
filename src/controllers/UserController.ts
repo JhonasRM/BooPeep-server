@@ -31,15 +31,15 @@ import {  User, User as UserModel } from '../models/userSchema';
     },
     get: async (req: Request, res: Response) => {
         try {
-            const id = req.params.id
+            const id = req.body.email
             const user = await UserModel.findById(id)
-
             if(!user){
                 res.status(404).json({msg: "Usuário não Encontrado"})
                 return
             }
 
             res.json(user)
+            return res.status(200).json({msg: "Login feito com sucesso"})
         } catch (error) {
             console.log(error)
         }

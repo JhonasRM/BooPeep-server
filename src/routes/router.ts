@@ -5,4 +5,4 @@ const UserRouter = require('./users')
 
 router.use("/", UserRouter)
 
-module.exports(router)
+export default router
