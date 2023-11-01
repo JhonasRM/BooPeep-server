@@ -5,10 +5,10 @@ import conn from './conn';
 import router from '../routes/router';
 
 const app = express();
-const port = 4000;
+const port = 3000;
 app.use(express.json());
 app.use(cors());
-app.use('/bd', router);
+app.use('/db', router);
 
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.header("Access-Control-Allow-Origin", "*");

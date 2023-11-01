@@ -12,15 +12,15 @@ router
     .get((req: Request ,res: Response) => UserController.getAll(req, res))
     
 router
-    .route("/user:id")
+    .route("/user")
     .get((req: Request ,res: Response) => UserController.get(req, res))
 
  router
-    .route("/user:id")
+    .route("/user")
     .delete((req: Request ,res: Response) => UserController.delete(req, res))
 
 router
-    .route("/user:id")
+    .route("/user")
     .put((req: Request ,res: Response) => UserController.update(req, res))
 module.exports = router;
 

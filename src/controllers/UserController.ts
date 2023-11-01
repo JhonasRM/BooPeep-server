@@ -6,6 +6,7 @@ import {  User, User as UserModel } from '../models/userSchema';
     create: async(req: Request, res: Response) => {
         try{
             const user ={
+                id: req.params.id,
                 name : req.body.name, 
                 email: req.body.email,
                 password: req.body.password,
@@ -45,7 +46,7 @@ import {  User, User as UserModel } from '../models/userSchema';
         }
     },
     delete: async (req: Request, res: Response) => {
-        const id = req.params.id
+        const id = req.body.email
             const user = await UserModel.findById(id)
 
             if(!user){
@@ -58,8 +59,9 @@ import {  User, User as UserModel } from '../models/userSchema';
     },
  
  update: async (req: Request, res: Response) => {
-    const id = req.params.id
+    const id = req.body.email
     const user ={
+        id: req.body.id,
         name : req.body.name, 
         email: req.body.email,
         password: req.body.password,
