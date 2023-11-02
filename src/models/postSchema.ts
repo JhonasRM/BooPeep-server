@@ -2,8 +2,10 @@ import mongoose, { Schema, Document, model, Model } from 'mongoose'
 
 interface Post extends Document {
   id: Number,
-  descricao: String,
-  imagem: String,
+  situation: Number,
+  description: String,
+  image: String,
+  contato: String
 }
   
 
@@ -12,13 +14,21 @@ const postSchema: Schema<Post> = new Schema({
     type: Number,
     required: true
   },
-  descricao: {
+  situation: {
+    type: Number,
+    required: true
+  },
+  description: {
     type: String,
     required: true
   },
-  imagem: {
+  image: {
     type: String,
     required: false
+  },
+  contato: {
+    type: String,
+    required: true
   },
 },
 { timestamps: true}

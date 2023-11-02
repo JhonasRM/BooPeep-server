@@ -6,17 +6,21 @@ import {  User, User as UserModel } from '../models/userSchema';
     create: async(req: Request, res: Response) => {
         try{
             const user ={
-                id: req.params.id,
+                // id: req.params.id,
                 name : req.body.name, 
                 email: req.body.email,
                 password: req.body.password,
-                phone: req.body.phone,
+               //phone: req.body.phone,
                 //course: req.body.course
             };
-
-            const responce = await UserModel.create(user);
+            const val = await UserModel.findById(req.body.email)
+            if(!val){
+                const responce = await UserModel.create(user);
 
             res.status(201).json({responce, msg: "Usuário Cadastrado com sucesso!"});
+                
+            }
+            res.status(401).json({user, msg: "Este usuário já existe"})
         }catch(error){
             console.log(error);
         }
@@ -36,7 +40,7 @@ import {  User, User as UserModel } from '../models/userSchema';
             const user = await UserModel.findById(id)
             if(!user){
                 res.status(404).json({msg: "Usuário não Encontrado"})
-                return
+                
             }
 
             res.json(user)
@@ -61,11 +65,11 @@ import {  User, User as UserModel } from '../models/userSchema';
  update: async (req: Request, res: Response) => {
     const id = req.body.email
     const user ={
-        id: req.body.id,
+        // id: req.body.id,
         name : req.body.name, 
         email: req.body.email,
         password: req.body.password,
-        phone: req.body.phone,
+       // phone: req.body.phone,
         // course: req.body.course
     };
 
@@ -75,7 +79,7 @@ import {  User, User as UserModel } from '../models/userSchema';
                 res.status(404).json({msg: "Usuário não Encontrado"})
                 return
             }
-        res.status(200).json({user, msg: "Usuário atualizado com sucesso."})
+        res.status(200).json({updatedUser, msg: "Usuário atualizado com sucesso."})
     
         }
     }

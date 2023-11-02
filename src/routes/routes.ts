@@ -6,7 +6,7 @@ const routes = express.Router()
 routes.post('/login', (req: Request, res: Response) => {
     const { email, password } = req.body
 
-    const user = users.find(user => user.email === email && user.password === password)
+    const user = user.find(user => user.email === email && user.password === password)
     if (user) {
         return res.status(200).json({ message: "Usuário logado com sucesso" })
 

@@ -1,30 +1,29 @@
 import { Request, Response } from 'express';
-import {  User as UserModel } from '../models/userSchema';
+import {  Post as PostModel } from '../models/postSchema';
 
- const UserController = {
+ const PostController = {
 
     create: async(req: Request, res: Response) => {
         try{
-            const user ={
-                name : req.body.name, 
-                email: req.body.email,
-                password: req.body.password,
-                phone: req.body.phone,
-                // course: req.body.course
+            const post ={
+               // id : req.body.id, 
+                sutuation: req.body.situation,
+                descrition: req.body.descrition,
+                image: req.body.descrition
             };
 
-            const responce = await UserModel.create(user);
+            const responce = await PostModel.create(post);
 
-            res.status(201).json({responce, msg: "Usuário Cadastrado com sucesso!"});
+            res.status(201).json({responce, msg: "Post feito com sucesso!"});
         }catch(error){
             console.log(error);
         }
     },
     getAll: async (req: Request,res: Response) => {
         try {
-            const user = await UserModel.find()
+            const post = await PostModel.find()
 
-            res.json(user)
+            res.json(post)
         } catch (error) {
             console.log(error)
         }
@@ -32,22 +31,54 @@ import {  User as UserModel } from '../models/userSchema';
     get: async (req: Request, res: Response) => {
         try {
             const id = req.params.id
-            const user = await UserModel.findById(id)
+            const post = await PostModel.findById(id)
 
-            if(!user){
-                res.status(404).json({msg: "Usuário não Encontrado"})
+            if(!post){
+                res.status(404).json({msg: "Post não Encontrado"})
                 return
             }
 
-            res.json(user)
+            res.json(post)
         } catch (error) {
             console.log(error)
         }
     },
-    del
+    delete: async (req: Request, res: Response) => {
+        const id = req.body.descrition
+            const post = await PostModel.findById(id)
 
- };
+            if(!post){
+                res.status(404).json({msg: "Post não Encontrado"})
+                return
+            }
+            const deletedUser = await PostModel.findByIdAndDelete(id)
 
-export default UserController;
+            res.json(201).json({deletedUser, msg: "Serviço excluido com sucesso"})
+    },
+ 
+ update: async (req: Request, res: Response) => {
+    const id = req.body.id
+    const user= {
+        //id: req.body.id,
+        situation: req.body.situation,
+        descrition: req.body.descrition,
+        image: req.body.image,
+       
+    };
+
+            const updatedUser = await PostModel.findByIdAndUpdate(id, user)
+
+            if(!user){
+                res.status(404).json({msg: "Post não Encontrado"})
+                return
+            }
+        res.status(200).json({user, msg: "Post atualizado com sucesso."})
+    
+        }
+    }
+
+export default PostController;
+
+
 
  
