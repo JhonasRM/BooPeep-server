@@ -8,7 +8,7 @@ router
     .post((req: Request ,res: Response) => PostController.create(req, res))
 
 router
-    .route("/post")
+    .route("/posts")
     .get((req: Request ,res: Response) => PostController.getAll(req, res))
     
 router
