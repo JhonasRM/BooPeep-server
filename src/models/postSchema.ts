@@ -12,7 +12,7 @@ interface Post extends Document {
 const postSchema: Schema<Post> = new Schema({
   id: {
     type: Number,
-    required: true
+    required: false
   },
   situation: {
     type: Number,
