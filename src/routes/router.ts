@@ -5,6 +5,6 @@ const UserRouter = require('./users')
 const postRouter = require('./post')
 
 router.use("/", UserRouter)
-router.use("/post", postRouter)
+router.use("/", postRouter)
 
 export default router

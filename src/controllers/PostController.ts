@@ -6,10 +6,11 @@ import {  Post as PostModel } from '../models/postSchema';
     create: async(req: Request, res: Response) => {
         try{
             const post ={
-               // id : req.body.id, 
-                sutuation: req.body.situation,
-                descrition: req.body.descrition,
-                image: req.body.descrition
+               id : req.body.id, 
+                situation: req.body.situation,
+                description: req.body.description,
+                image: req.body.descrition,
+                contato: req.body.contato
             };
 
             const responce = await PostModel.create(post);
@@ -30,7 +31,7 @@ import {  Post as PostModel } from '../models/postSchema';
     },
     get: async (req: Request, res: Response) => {
         try {
-            const id = req.params.id
+            const id = req.body.id
             const post = await PostModel.findById(id)
 
             if(!post){
@@ -44,7 +45,7 @@ import {  Post as PostModel } from '../models/postSchema';
         }
     },
     delete: async (req: Request, res: Response) => {
-        const id = req.body.descrition
+        const id = req.body.id
             const post = await PostModel.findById(id)
 
             if(!post){
@@ -59,7 +60,7 @@ import {  Post as PostModel } from '../models/postSchema';
  update: async (req: Request, res: Response) => {
     const id = req.body.id
     const user= {
-        //id: req.body.id,
+        id: req.body.id,
         situation: req.body.situation,
         descrition: req.body.descrition,
         image: req.body.image,

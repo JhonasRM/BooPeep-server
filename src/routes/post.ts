@@ -12,15 +12,14 @@ router
     .get((req: Request ,res: Response) => PostController.getAll(req, res))
     
 router
-    .route("/post:id")
+    .route("/post")
     .get((req: Request ,res: Response) => PostController.get(req, res))
 
  router
-    .route("/post:id")
+    .route("/post")
     .delete((req: Request ,res: Response) => PostController.delete(req, res))
-
 router
-    .route("/post:id")
+    .route("/post")
     .put((req: Request ,res: Response) => PostController.update(req, res))
 module.exports = router;
 

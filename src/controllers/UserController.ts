@@ -6,14 +6,14 @@ import {  User, User as UserModel } from '../models/userSchema';
     create: async(req: Request, res: Response) => {
         try{
             const user ={
-                // id: req.params.id,
+                // id: req.body.id,
                 name : req.body.name, 
                 email: req.body.email,
                 password: req.body.password,
-               //phone: req.body.phone,
+               //phone: req.body.pho    ne,
                 //course: req.body.course
             };
-            const val = await UserModel.findById(req.body.email)
+            const val = await UserModel.findOne({email: req.body.email, password: req.body.password})
             if(!val){
                 const responce = await UserModel.create(user);
 
@@ -36,51 +36,61 @@ import {  User, User as UserModel } from '../models/userSchema';
     },
     get: async (req: Request, res: Response) => {
         try {
-            const id = req.body.email
-            const user = await UserModel.findById(id)
+            const user = await UserModel.findOne({
+                email: req.query.email,
+                password: req.query.password
+            })
             if(!user){
                 res.status(404).json({msg: "Usuário não Encontrado"})
                 
             }
 
-            res.json(user)
             return res.status(200).json({msg: "Login feito com sucesso"})
         } catch (error) {
             console.log(error)
         }
     },
     delete: async (req: Request, res: Response) => {
-        const id = req.body.email
-            const user = await UserModel.findById(id)
+        // const email = req.body.email
+            const user = await UserModel.findOne({
+                email: req.query.email,
+                password: req.query.password
+            })
 
             if(!user){
                 res.status(404).json({msg: "Usuário não Encontrado"})
-                return
             }
-            const deletedUser = await UserModel.findByIdAndDelete(id)
+            const deletedUser = await UserModel.deleteOne({
+                email: req.query.email,
+                password: req.query.password
+            })
 
-            res.json(201).json({deletedUser, msg: "Serviço excluido com sucesso"})
+            return res.json(201).json({deletedUser, msg:"Serviço excluido com sucesso"})
     },
  
  update: async (req: Request, res: Response) => {
-    const id = req.body.email
     const user ={
-        // id: req.body.id,
         name : req.body.name, 
         email: req.body.email,
         password: req.body.password,
-       // phone: req.body.phone,
+    //    phone: req.body.phone,
         // course: req.body.course
     };
 
-            const updatedUser = await UserModel.findByIdAndUpdate(id, user)
+            const finduser = await UserModel.findOne({
+                email: req.query.email,
+                password: req.query.password
+            })
+            const updatedUser =  await UserModel.updateOne({
+                email: req.body.email,
+                password: req.body.password
+            }, user)
 
-            if(!user){
+            if(!updatedUser){
                 res.status(404).json({msg: "Usuário não Encontrado"})
                 return
-            }
+            } 
         res.status(200).json({updatedUser, msg: "Usuário atualizado com sucesso."})
-    
         }
     }
 
