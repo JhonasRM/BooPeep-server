@@ -5,8 +5,8 @@ const password = 'cX1FiT5ZUKmM97X6'; // Substitua pela sua senha
 const port = '27017'
 
 // Montar a string de conexão
-const connectionString = `mongodb://${username}:${password}@ac-gkmufvd-shard-00-00.wofeoxy.mongodb.net:${port},ac-gkmufvd-shard-00-01.wofeoxy.mongodb.net:${port},ac-gkmufvd-shard-00-02.wofeoxy.mongodb.net:${port}/?ssl=true&replicaSet=atlas-tkd1is-shard-0&authSource=admin&retryWrites=true&w=majority`
-// const connectionString = `http://localhost:27017`
+// const connectionString = `mongodb://${username}:${password}@ac-gkmufvd-shard-00-00.wofeoxy.mongodb.net:${port},ac-gkmufvd-shard-00-01.wofeoxy.mongodb.net:${port},ac-gkmufvd-shard-00-02.wofeoxy.mongodb.net:${port}/?ssl=true&replicaSet=atlas-tkd1is-shard-0&authSource=admin&retryWrites=true&w=majority`
+const connectionString = `mongodb://localhost:27017`
 async function conn(): Promise<void> {
   await mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
